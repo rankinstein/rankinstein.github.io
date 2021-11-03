@@ -60,7 +60,6 @@ class Root {
 let frame, finalFrame,
   magnitudeFactor, mousedown
 function init() {
-  mousedown = false
   frame = 0
   finalFrame = 1000
   magnitudeFactor = randomValue(1, 3)
@@ -71,18 +70,20 @@ function init() {
 
   window.addEventListener('pointerdown', e => {
     mousedown = true
-  })
+  }, false)
   window.addEventListener('pointerup', e => {
+    console.log('pointer up')
     mousedown = false
-  })
+  }, false)
   window.addEventListener('pointermove', e => {
+    console.log('move')
     if (mousedown) {
       const root = new Root(e.x, e.y)
       for(var i = 0; i < 6; i++) {
         root.update()
       }
     }
-  })
+  }, false)
 }
 
 
