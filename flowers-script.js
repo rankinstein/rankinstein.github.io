@@ -9,6 +9,14 @@ function clearCanvas() {
   ctx.clearRect(0,0, canvas.width, canvas.height)
 }
 
+function randomSign() {
+  return Math.sign(Math.random() - 0.5)
+}
+
+function randomValue(min, max) {
+  return Math.random() * (max - min) + min
+}
+
 function hslString(hue, saturation, lightness) {
   return `hsl(${hue},${saturation}%,${lightness}%)`
 }
@@ -28,20 +36,27 @@ let frame, finalFrame,
   magnitudeFactor
 function init() {
   frame = 0
-  finalFrame = 400
-  magnitudeFactor = Math.random() * 2
-  angleFactor = Math.random()
+  finalFrame = 1000
+  magnitudeFactor = randomValue(1, 3)
+  angleFactor = randomValue(0, 1) * randomSign()
   initialHue = Math.random() * 360
-  hueGrowth = Math.random()
-  growthFactor = Math.random() * 100
+  hueGrowth = randomValue(0, 0.5) * randomSign()
+  growthFactor = Math.random() * 10
+  console.log({
+    magnitudeFactor,
+    angleFactor,
+    initialHue,
+    hueGrowth,
+    growthFactor
+  })
 }
 
 function update() {
   frame++
   const angle = frame
   return {
-    x: magnitudeFactor * frame * Math.cos(angle*angleFactor) + canvas.width / 2,
-    y: magnitudeFactor * frame * Math.sin(angle*angleFactor) + canvas.height / 2,
+    x: magnitudeFactor * frame * Math.cos(-angle*angleFactor) + canvas.width / 2,
+    y: magnitudeFactor * frame * Math.sin(-angle*angleFactor) + canvas.height / 2,
     radius: Math.sqrt(frame * growthFactor),
     hue: (initialHue + frame) * hueGrowth
   }
@@ -52,7 +67,7 @@ function draw(state) {
 }
 
 function animate() {
-  // clearCanvas()
+  //clearCanvas()
   const state = update()
   draw(state)
   if (frame > finalFrame) {
