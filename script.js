@@ -36,20 +36,22 @@ class Root {
   constructor(x, y) {
     this.x = x
     this.y = y
-    this.speedX = randomValue(-2, 2)
-    this.speedY = randomValue(-2, 2)
-    this.maxSize = randomValue(5, 12)
+    this.speedX = randomValue(-3, 3)
+    this.speedY = randomValue(-3, 3)
+    this.maxSize = randomValue(5, 32)
     this.size = randomValue(2, 3)
     this.angle = randomValue(0, Math.PI * 2)
+    this.hue = randomValue(0, 360)
   }
 
   update() {
-    this.angle += 0.1
+    this.angle += 0.03
     this.x += this.speedX * Math.sin(this.angle)
     this.y += this.speedY * Math.cos(this.angle)
     this.size += 0.1
+    this.hue += 1
     if (this.size < this.maxSize) {
-      drawCircle({ x: this.x, y: this.y, radius: this.size, hue: 140 })
+      drawCircle({ x: this.x, y: this.y, radius: this.size, hue: this.hue })
       requestAnimationFrame(this.update.bind(this))
     }
   }
@@ -70,6 +72,10 @@ function init() {
 
   window.addEventListener('pointerdown', e => {
     mousedown = true
+    const root = new Root(e.x, e.y)
+    for(var i = 0; i < 6; i++) {
+      root.update()
+    }
   }, false)
   window.addEventListener('pointerup', e => {
     console.log('pointer up')
