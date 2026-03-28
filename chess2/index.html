@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="chessboard2/chessboard2.min.css" rel="stylesheet">
+    <script src="chessboard2/chessboard2.min.js"></script>
+    <title>Chess AI</title>
+    <script type="module" crossorigin src="/chess/assets/index-Du1VZxhI.js"></script>
+    <link rel="stylesheet" crossorigin href="/chess/assets/index-DZmc2G7D.css">
+  </head>
+  <body>
+    <div class="app">
+      <!-- LEFT PANEL -->
+      <aside class="panel panel-config">
+        <h2 class="panel-heading">Configuration</h2>
+
+        <section class="player-config">
+          <h3>White</h3>
+          <label for="white-algorithm">Algorithm</label>
+          <select id="white-algorithm"></select>
+          <label for="white-depth">Search Depth</label>
+          <select id="white-depth"></select>
+        </section>
+
+        <section class="player-config">
+          <h3>Black</h3>
+          <label for="black-algorithm">Algorithm</label>
+          <select id="black-algorithm"></select>
+          <label for="black-depth">Search Depth</label>
+          <select id="black-depth"></select>
+        </section>
+
+        <section class="stats-section">
+          <h3>Statistics</h3>
+          <div class="stats-grid">
+            <div class="stats-column">
+              <h4>White</h4>
+              <dl>
+                <dt>Positions</dt><dd id="white-num-positions">0</dd>
+                <dt>Time (s)</dt><dd id="white-move-time">0</dd>
+                <dt>Pos/sec</dt><dd id="white-position-rate">0</dd>
+                <dt>Total pos.</dt><dd id="white-total-positions">0</dd>
+                <dt>Total time</dt><dd id="white-total-duration">0</dd>
+                <dt>Avg pos/turn</dt><dd id="white-avg-positions">0</dd>
+                <dt>Avg time/turn</dt><dd id="white-avg-duration">0</dd>
+              </dl>
+            </div>
+            <div class="stats-column">
+              <h4>Black</h4>
+              <dl>
+                <dt>Positions</dt><dd id="black-num-positions">0</dd>
+                <dt>Time (s)</dt><dd id="black-move-time">0</dd>
+                <dt>Pos/sec</dt><dd id="black-position-rate">0</dd>
+                <dt>Total pos.</dt><dd id="black-total-positions">0</dd>
+                <dt>Total time</dt><dd id="black-total-duration">0</dd>
+                <dt>Avg pos/turn</dt><dd id="black-avg-positions">0</dd>
+                <dt>Avg time/turn</dt><dd id="black-avg-duration">0</dd>
+              </dl>
+            </div>
+          </div>
+        </section>
+      </aside>
+
+      <!-- CENTER PANEL -->
+      <main class="panel panel-board">
+        <div id="board" style="width: 400px"></div>
+        <div class="controls">
+          <button id="undo-button" type="button">Undo</button>
+          <button id="move-button" type="button">Make Move</button>
+          <button id="reset-button" type="button">Reset</button>
+        </div>
+      </main>
+
+      <!-- RIGHT PANEL -->
+      <aside class="panel panel-description">
+        <h2 class="panel-heading">Algorithm Info</h2>
+        <div id="description-content">
+          <p class="placeholder">Select an AI algorithm to see its description.</p>
+        </div>
+      </aside>
+    </div>
+  </body>
+</html>
